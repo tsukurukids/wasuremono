@@ -1,0 +1,200 @@
+/* --- 全体のデザイン魔法 --- */
+* {
+    font-family: 'BIZ UDPGothic', sans-serif !important;
+}
+
+@keyframes drift {
+    from {
+        transform: translateX(100vw);
+    }
+
+    to {
+        transform: translateX(-100vw);
+    }
+}
+
+.animate-floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.bouncy-button:active {
+    transform: scale(0.92);
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* --- 📋 スクロールをキレイにする魔法 --- */
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* --- 横向きのスクロールをきれいにする魔法 --- */
+.scrollbar-custom-x::-webkit-scrollbar {
+    height: 6px;
+}
+
+.scrollbar-custom-x::-webkit-scrollbar-track {
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.scrollbar-custom-x::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+.scrollbar-custom-x::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+}
+
+/* --- ミニゲーム用の魔法 --- */
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* --- 🌈 虹色の魔法（もっと派手バージョン！） --- */
+@keyframes rainbow-flashy {
+    0% {
+        background-color: #ffadad;
+    }
+
+    20% {
+        background-color: #ffd6a5;
+    }
+
+    40% {
+        background-color: #fdffb6;
+    }
+
+    60% {
+        background-color: #caffbf;
+    }
+
+    80% {
+        background-color: #9bf6ff;
+    }
+
+    100% {
+        background-color: #ffadad;
+    }
+}
+
+/* 背景が超高速でキラキラするクラス */
+.rainbow-bg-flashy {
+    animation: rainbow-flashy 3s linear infinite !important;
+}
+
+/* アプリがドキドキ動いて光るクラス */
+@keyframes app-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 60px rgba(255, 255, 255, 1);
+        transform: scale(1.03);
+    }
+}
+
+.app-flashy {
+    animation: app-glow 0.8s ease-in-out infinite !important;
+    border: 6px solid gold !important;
+}
+
+/* --- 👹 ホラーモードの魔法 (Darkness Magic) --- */
+@keyframes horror-pulse {
+    0% { background-color: #450a0a; }
+    50% { background-color: #7f1d1d; }
+    100% { background-color: #450a0a; }
+}
+
+.horror-bg {
+    animation: horror-pulse 2s infinite !important;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.app-shake {
+    animation: glitch 0.3s infinite !important;
+    border: 4px solid #b91c1c !important;
+}
+
+@keyframes scary-flash {
+    0% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+.scary-flash {
+    animation: scary-flash 0.5s ease-out forwards;
+}
+
+@keyframes wigglescary {
+    0%, 100% { transform: rotate(-5deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.1); }
+}
+
+.animate-wiggle {
+    animation: wigglescary 0.1s infinite;
+}
