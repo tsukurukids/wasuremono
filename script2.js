@@ -54,7 +54,13 @@ const Icon = ({ name, className, size = 20 }) => {
 };
 
 // --- 📝 おなまえやランクの計算 ---
-function getRankName(totalLevel, lang) {
+function getRankName(totalLevel, lang, name) {
+    // 🎒 おなまえが「いちねんせい」のときは、ひらがなのランク名（称号）にするよ！
+    if (name === "いちねんせい") {
+        if (totalLevel >= 300) return "うちゅうのぱっきんぐおう 🪐";
+        if (totalLevel >= 150) return "ぱっきんぐのかみさま 🌌";
+        return "じゅんびのみならい 🌱";
+    }
     if (lang === 'ja') {
         if (totalLevel >= 300) return "宇宙のパッキング王 🪐";
         if (totalLevel >= 150) return "パッキングの神様 🌌";
@@ -99,8 +105,8 @@ const OMIKUJI_RESULTS = [
 const LUCKY_ITEMS = ["🍏 りんご", "✏️ えんぴつ", "👟 スニーカー", "🌈 にじ", "🍦 アイス", "🐱 ねこ", "⚽ ボール", "🎨 パレット", "🎒 リュック", "🍬 あめ"];
 
 const TRANSLATIONS = {
-    ja: { appTitle: "持ち物チェック 😊", progress: "じゅんびのしんちょく", work: "学校 🏫", travel: "旅行 ✈️", gym: "ダンス 💃", placeholder: "なにをもっていく？ ➕", finalCheck: "さいごのチェックへ 🚀", fingerCheck: "👈 ゆびさし確認！", go: "いってきます！ 👋", reset: "ぜんぶリセット", historyTitle: "削除履歴（ゴミ箱）", historyDesc: "ここにあるアイテムは完全に消すことはできません。必要なときは「元に戻す」ボタンを押してね。", restore: "元に戻す", noHistory: "まだ履歴はありません", zukanTitle: "おたから図鑑 💎", currentStreak: "現在のれんぞく", highScore: "最高スコア", days: "日", points: "pt", collected: "集めたおたから", avatarSet: "アバター設定", changeEmoji: "好きな絵文字に変える", uploadPhoto: "写真をのせる", backToPenguin: "🐧 戻す", gameTitle: "1日1回おたから修行", timeUp: "タイムアップ！⏰", gameEndDesc: "また明日も修行しようね！✨", backToPrep: "準備にもどる！ 👌", motivation: "やる気 🔥", important: "必須！", nameLabel: "おなまえ", langName: "🇯🇵 日本語", loading: "読み込み中...", gameOver: "ゲーム終了！", dailyLimit: "今日はもう遊んだよ", playNow: "修行を開始！", disclaimer: "言語はAIが作っているので、間違えている可能性があるよ💦", secretTitle: "虹色パーティー発動！🌈", secretMsg: "おめでとう！隠しコマンドを見つけたね！今日だけは特別にもう1回修行できるよ！" },
-    en: { appTitle: "Checklist 😊", progress: "Progress", work: "School 🏫", travel: "Travel ✈️", gym: "Gym 🏃", placeholder: "What to bring? ➕", finalCheck: "Final Check! 🚀", fingerCheck: "👈 Double Check!", go: "I'm off! 👋", reset: "Reset All", historyTitle: "Delete History", historyDesc: "Items here cannot be deleted. Press 'Restore' to bring them back.", restore: "Restore", noHistory: "No history yet", zukanTitle: "Collection 💎", currentStreak: "Current Streak", highScore: "High Score", days: "Days", points: "pt", collected: "Treasures Found", avatarSet: "Avatar Settings", changeEmoji: "Change Emoji", uploadPhoto: "Upload Photo", backToPenguin: "🐧 Back", gameTitle: "Daily Challenge", timeUp: "Time's Up! ⏰", gameEndDesc: "Great job! See you tomorrow! ✨", backToPrep: "Back to Prep! 👌", motivation: "Motivation 🔥", important: "Must!", nameLabel: "Name", langName: "🇺🇸 English", loading: "Loading...", gameOver: "Game Over!", dailyLimit: "Played today", playNow: "Start Training", disclaimer: "Languages are AI-made, may contain errors 💦", secretTitle: "Rainbow Party! 🌈", secretMsg: "Congrats! Secret command found! You can play once more today!" },
+    ja: { appTitle: "持ち物チェック 😊", progress: "じゅんびのしんちょく", work: "学校 🏫", travel: "旅行 ✈️", gym: "ダンス 💃", placeholder: "なにをもっていく？ ➕", finalCheck: "さいごのチェックへ 🚀", fingerCheck: "👈 ゆびさし確認！", go: "いってきます！ 👋", reset: "ぜんぶリセット", historyTitle: "削除履歴（ゴミ箱）", historyDesc: "ここにあるアイテムは完全に消すことはできません。必要なときは「元に戻す」ボタンを押してね。", restore: "元に戻す", noHistory: "まだ履歴はありません", zukanTitle: "おたから図鑑 💎", currentStreak: "現在のれんぞく", highScore: "最高スコア", days: "日", points: "pt", collected: "集めたおたから", avatarSet: "アバター設定", changeEmoji: "好きな絵文字に変える", uploadPhoto: "写真をのせる", backToPenguin: "🐧 戻す", gameTitle: "1日1回おたから修行", timeUp: "タイムアップ！⏰", gameEndDesc: "また明日も修行しようね！✨", backToPrep: "準備にもどる！ 👌", motivation: "やる気 🔥", important: "必須！", nameLabel: "おなまえ", langName: "🇯🇵 日本語", loading: "読み込み中...", gameOver: "ゲーム終了！", dailyLimit: "今日はもう遊んだよ", playNow: "修行を開始！", disclaimer: "言語はAIが作っているので、間違えている可能性があるよ💦", secretTitle: "虹色パーティー発動！🌈", secretMsg: "おめでとう！隠しコマンドを見つけたね！今日だけは特別にもう1回修行できるよ！", item_water: "水筒 💧", item_gym: "体育着 👕", item_hat: "赤白帽子 🧢", item_pencil: "筆箱・えんぴつ ✏️", item_notebook: "教科書・ノート 📚", item_diary: "連絡帳 📒", item_motivation: "やる気 🔥" },
+    en: { appTitle: "Checklist 😊", progress: "Progress", work: "School 🏫", travel: "Travel ✈️", gym: "Gym 🏃", placeholder: "What to bring? ➕", finalCheck: "Final Check! 🚀", fingerCheck: "👈 Double Check!", go: "I'm off! 👋", reset: "Reset All", historyTitle: "Delete History", historyDesc: "Items here cannot be deleted. Press 'Restore' to bring them back.", restore: "Restore", noHistory: "No history yet", zukanTitle: "Collection 💎", currentStreak: "Current Streak", highScore: "High Score", days: "Days", points: "pt", collected: "Treasures Found", avatarSet: "Avatar Settings", changeEmoji: "Change Emoji", uploadPhoto: "Upload Photo", backToPenguin: "🐧 Back", gameTitle: "Daily Challenge", timeUp: "Time's Up! ⏰", gameEndDesc: "Great job! See you tomorrow! ✨", backToPrep: "Back to Prep! 👌", motivation: "Motivation 🔥", important: "Must!", nameLabel: "Name", langName: "🇺🇸 English", loading: "Loading...", gameOver: "Game Over!", dailyLimit: "Played today", playNow: "Start Training", disclaimer: "Languages are AI-made, may contain errors 💦", secretTitle: "Rainbow Party! 🌈", secretMsg: "Congrats! Secret command found! You can play once more today!", item_water: "Water Bottle 💧", item_gym: "Gym Clothes 👕", item_hat: "Red & White Cap 🧢", item_pencil: "Pencil Case ✏️", item_notebook: "Textbooks 📚", item_diary: "Planner 📒", item_motivation: "Motivation 🔥" },
     en_gb: { appTitle: "My List 😊", progress: "Progress", work: "School 🏫", travel: "Travel ✈️", gym: "Sport 🏃", placeholder: "What to pack? ➕", finalCheck: "Final Check! 🚀", fingerCheck: "👈 Double Check!", go: "I'm off! 👋", reset: "Reset All", historyTitle: "Deleted Items", historyDesc: "Items here cannot be permanently removed. Press 'Restore' to bring them back.", restore: "Restore", noHistory: "No history yet", zukanTitle: "Treasures 💎", currentStreak: "Current Streak", highScore: "High Score", days: "Days", points: "pt", collected: "Found Treasures", avatarSet: "Avatar", changeEmoji: "Change Emoji", uploadPhoto: "Upload Photo", backToPenguin: "🐧 Back", gameTitle: "Daily Training", timeUp: "Time's Up! ⏰", gameEndDesc: "One minute is over! Back to work! ✨", backToPrep: "Let's Go! 👌", motivation: "Motivation 🔥", important: "Must!", nameLabel: "Name", langName: "English (UK)", loading: "Loading...", gameOver: "End!", dailyLimit: "Played today", playNow: "Start Training", disclaimer: "Languages are AI-generated and might have mistakes 💦", secretTitle: "Rainbow Party! 🌈", secretMsg: "Congrats! Secret command found! Extra training enabled!" },
     ru: { appTitle: "Мой список 😊", progress: "Прогресс", work: "Школа 🏫", travel: "Поездка ✈️", gym: "Спорт 🏃", placeholder: "Что взять? ➕", finalCheck: "Проверка! 🚀", fingerCheck: "👈 Проверь еще раз!", go: "Я пошел! 👋", reset: "Сброс", historyTitle: "История", restore: "Вернуть", noHistory: "Пусто", zukanTitle: "Сокровища 💎", currentStreak: "Серия", highScore: "Рекорд", days: "дн.", points: "очк.", collected: "Собрано", avatarSet: "Аватар", changeEmoji: "Изменить", uploadPhoto: "Загрузить", backToPenguin: "🐧 Назад", gameTitle: "Тренировка дня", timeUp: "Время!⏰", gameEndDesc: "До завтра! ✨", backToPrep: "Готово! 👌", motivation: "Драйв 🔥", important: "Важно!", nameLabel: "Имя", langName: "Русский", loading: "Загрузка...", gameOver: "Финиш!", dailyLimit: "Уже играли", playNow: "Начать", disclaimer: "Языки созданы ИИ, возможны ошибки 💦", secretTitle: "Радужный режим! 🌈", secretMsg: "Поздравляем! Вы нашли секретный код! Можно сыграть еще раз!" },
     af: { appTitle: "Kontrolys 😊", progress: "Vordering", work: "Skool 🏫", travel: "Reis ✈️", gym: "Sport 🏃", placeholder: "Wat om te neem? ➕", finalCheck: "Finale kontrole! 🚀", fingerCheck: "👈 Dubbel kontrole!", go: "Ek gaan nou! 👋", reset: "Herstel alles", historyTitle: "Geskiedenis", restore: "Herstel", noHistory: "Geen geskiedenis", zukanTitle: "Skatkis 💎", currentStreak: "Reeks", highScore: "Beste", days: "Dae", points: "pt", collected: "Gekollekteer", avatarSet: "Avatar", changeEmoji: "Verander", uploadPhoto: "Laai op", backToPenguin: "🐧 Terug", gameTitle: "Daaglikse Oefening", timeUp: "Tyd is om!⏰", gameEndDesc: "Sien jou môre! ✨", backToPrep: "Verstaan! 👌", motivation: "Gees 🔥", important: "Moet!", nameLabel: "Naam", langName: "Afrikaans", loading: "Laai tans...", gameOver: "Klaar!", dailyLimit: "Reeds gespeel", playNow: "Begin", disclaimer: "Tale word deur KI gegenereer, foute is moontlik 💦", secretTitle: "Reënboog-partytjie! 🌈", secretMsg: "Geluk! Jy het the geheime kode gevind! Jy kan wieder speel!" },
@@ -112,7 +118,61 @@ const TRANSLATIONS = {
     es: { appTitle: "Lista 😊", progress: "Progreso", work: "Escuela 🏫", travel: "Viaje ✈️", gym: "Gimnasio 🏃", placeholder: "¿Qué llevar? ➕", finalCheck: "¡Chequeo final! 🚀", fingerCheck: "👈 ¡Doble chequeo!", go: "¡Me voy! 👋", reset: "Reiniciar todo", historyTitle: "Historial", restore: "Restaurar", noHistory: "Sin historial", zukanTitle: "Colección 💎", currentStreak: "Racha", highScore: "Máximo", days: "Días", points: "pt", collected: "Tesoros", avatarSet: "Ajustes", changeEmoji: "Cambiar emoji", uploadPhoto: "Subir foto", backToPenguin: "🐧 Volver", gameTitle: "Tesoros Diarios", timeUp: "¡Tiempo! ⏰", gameEndDesc: "¡Hasta mañana! ✨", backToPrep: "¡Entendido! 👌", motivation: "Motivación 🔥", important: "¡Obligatorio!", nameLabel: "Nombre", langName: "Español", loading: "Cargando...", gameOver: "¡Fin!", dailyLimit: "Hoy ya jugaste", playNow: "Jugar ahora", disclaimer: "Los idiomas son generados por IA, puede haber errores 💦", secretTitle: "¡Modo Arcoíris! 🌈", secretMsg: "¡Felicidades! ¡Has encontrado el código secreto! ¡Puedes jugar una vez más hoy!" },
     fr: { appTitle: "Ma Liste 😊", progress: "Progrès", work: "École 🏫", travel: "Voyage ✈️", gym: "Sport 🏃", placeholder: "Quoi emporter ? ➕", finalCheck: "Dernier check ! 🚀", fingerCheck: "👈 Vérification !", go: "J'y vais ! 👋", reset: "Réinitialiser", historyTitle: "Historique", restore: "Restaurer", noHistory: "Aucun historique", zukanTitle: "Collection 💎", currentStreak: "Série actuelle", highScore: "Record", days: "Jours", points: "pts", collected: "Trésors trouvés", avatarSet: "Avatar", changeEmoji: "Changer l'emoji", uploadPhoto: "Ajouter photo", backToPenguin: "🐧 Retour", gameTitle: "Challenge Quotidien", timeUp: "Temps écoulé !⏰", gameEndDesc: "À demain ! ✨", backToPrep: "C'est parti ! 👌", motivation: "Motivation 🔥", important: "Important !", nameLabel: "Nom", langName: "Français", loading: "Chargement...", gameOver: "Fini !", dailyLimit: "Déjà joué", playNow: "Jouer", disclaimer: "Langues générées par l'IA, des erreurs sont possibles 💦", secretTitle: "Mode Arc-en-ciel ! 🌈", secretMsg: "Bravo ! Code secret trouvé ! Jouez encore une fois aujourd'hui !" },
     it: { appTitle: "Mia Lista 😊", progress: "Progresso", work: "Scuola 🏫", travel: "Viaggio ✈️", gym: "Palestra 🏃", placeholder: "Cosa portare? ➕", finalCheck: "Ultimo check ! 🚀", fingerCheck: "👈 Doppio controllo!", go: "Vado! 👋", reset: "Resetta tutto", historyTitle: "Cronologia", restore: "Ripristina", noHistory: "Nessuna cronologia", zukanTitle: "Collezione 💎", currentStreak: "Serie attuale", highScore: "Record", days: "Giorni", points: "pt", collected: "Tesori trovati", avatarSet: "Avatar", changeEmoji: "Cambia emoji", uploadPhoto: "Carica foto", backToPenguin: "🐧 Indietro", gameTitle: "Sfida Quotidiana", timeUp: "Tempo scaduto!⏰", gameEndDesc: "A domani! ✨", backToPrep: "Ricevuto! 👌", motivation: "Motivazione 🔥", important: "Obbligatorio!", nameLabel: "Nom", langName: "Italiano", loading: "Caricamento...", gameOver: "Fine!", dailyLimit: "Già giocato", playNow: "Gioca", disclaimer: "Le lingue sono generate dall'IA e potrebbero esserci errori 💦", secretTitle: "Festa Arcobaleno! 🌈", secretMsg: "Evviva! Hai trovato il comando segreto! Puoi giocare ancora una volta oggi!" },
-    ar: { appTitle: "قائمتي 😊", progress: "التقدم", work: "المدرسة 🏫", travel: "السفر ✈️", gym: "الرياضة 🏃", placeholder: "ماذا ستأخذ؟ ➕", finalCheck: "التحقق الأخير! 🚀", fingerCheck: "👈 تحقق مرتين!", go: "أنا ذاهب! 👋", reset: "إعادة ضبط", historyTitle: "سجل الحذف", restore: "استعادة", noHistory: "لا يوجد سجل", zukanTitle: "مجموعة الكنوز 💎", currentStreak: "السلسلة الحالية", highScore: "أعلى نتيجة", days: "أيام", points: "نقطة", collected: "الكنوز الموجودة", avatarSet: "إعدادات الأفاتار", changeEmoji: "تغيير الرمز", uploadPhoto: "رفع صورة", backToPenguin: "🐧 عودة", gameTitle: "تحدي الكنز اليومい", timeUp: "انتهى الوقت!⏰", gameEndDesc: "أراك غداً! ✨", backToPrep: "فهمت! 👌", motivation: "التحفيز 🔥", important: "ضروري!", nameLabel: "الاسم", langName: "العربية", loading: "جاري التحميل...", gameOver: "انتهى!", dailyLimit: "لعبت اليوم", playNow: "العب الآن", disclaimer: "اللغات من إنتاج الذكاء الاصطناعي، قد تكون هناك أخطاء 💦", secretTitle: "حفلة قوس قزح! 🌈", secretMsg: "مبروك! وجدت الأمر السري! يمكنك اللعب مرة أخرى اليوم!" }
+    ar: { appTitle: "قائمتي 😊", progress: "التقدم", work: "المدرسة 🏫", travel: "السفر ✈️", gym: "الرياضة 🏃", placeholder: "ماذا ستأخذ؟ ➕", finalCheck: "التحقق الأخير! 🚀", fingerCheck: "👈 تحقق مرتين!", go: "أنا ذاهب! 👋", reset: "إعادة ضبط", historyTitle: "سجل الحذف", restore: "استعادة", noHistory: "لا يوجد سجل", zukanTitle: "مجموعة الكنوز 💎", currentStreak: "السلسلة الحالية", highScore: "أعلى نتيجة", days: "أيام", points: "نقطة", collected: "الكنوز الموجودة", avatarSet: "إعدادات الأفاتار", changeEmoji: "تغيير الرمز", uploadPhoto: "رفع صورة", backToPenguin: "🐧 عودة", gameTitle: "تحدي الكنز اليومい", timeUp: "انتهى الوقت!⏰", gameEndDesc: "أراك غداً! ✨", backToPrep: "فهمت! 👌", motivation: "التحفيز 🔥", important: "ضروري!", nameLabel: "الاسم", langName: "العربية", loading: "جاري التحميل...", gameOver: "انتهى!", dailyLimit: "لعبت اليوم", playNow: "العب الآن", disclaimer: "اللغات من إنتاج الذكاء الاصطناعي، قد تكون هناك أخطاء 💦", secretTitle: "حفلة قوس قزح! 🌈", secretMsg: "مبروك! وجدت الأمر السري! يمكنك اللعب مرة أخرى اليوم!" },
+    // 🎒 おなまえを「いちねんせい」にしたときに使う、ひらがなだけの言葉のグループだよ！
+    hiragana: {
+        appTitle: "もちものちぇっく 😊",
+        progress: "じゅんびのしんちょく",
+        work: "がっこう 🏫",
+        travel: "りょこう ✈️",
+        gym: "だんす 💃",
+        placeholder: "なにをもっていく？ ➕",
+        finalCheck: "さいごのちぇっくへ 🚀",
+        fingerCheck: "👈 ゆびさしかくにん！",
+        go: "いってきます！ 👋",
+        reset: "ぜんぶリセット",
+        historyTitle: "けしたもののきろく（ごみばこ）",
+        historyDesc: "ここにあるものはかんぜんにはけせません。ひつようなときは「もとにもどす」ボタンをおしてね。",
+        restore: "もとにもどす",
+        noHistory: "まだきろくはありません",
+        zukanTitle: "おたからずかん 💎",
+        currentStreak: "いまのれんぞく",
+        highScore: "さいこうすこあ",
+        days: "にち",
+        points: "てん",
+        collected: "あつめたおたから",
+        avatarSet: "あばたーのせってい",
+        changeEmoji: "すきなえもじにかえる",
+        uploadPhoto: "しゃしんをのせる",
+        backToPenguin: "🐧 もどす",
+        gameTitle: "1にち1かいおたからしゅぎょう",
+        timeUp: "たいむあっぷ！⏰",
+        gameEndDesc: "またあしたもしゅぎょうしようね！✨",
+        backToPrep: "じゅんびにもどる！ 👌",
+        motivation: "やるき 🔥",
+        important: "ぜったい！",
+        nameLabel: "おなまえ",
+        langName: "🇯🇵 ひらがな",
+        loading: "よみこみちゅう...",
+        gameOver: "げーむしゅうりょう！",
+        dailyLimit: "きょうはもうあそんだよ",
+        playNow: "しゅぎょうをはじめる！",
+        disclaimer: "ことばはAIがつくっているので、まちがっているかもしれないよ💦",
+        secretTitle: "にじいろぱーてぃーはつどう！🌈",
+        secretMsg: "おめでとう！ひみつのこまんどをみつけたね！きょうだけはとくべつにもう1かいしゅぎょうできるよ！",
+        finalDoor: "さいごのとびら",
+        stage: "すてーじ ",
+        gameStage1Desc: "すうじを 1 からじゅんばんにおせ！",
+        gameStage2Desc: "このじゅんばんでいろをおせ！",
+        gameStage3Desc: "をみつけだせ！",
+        gameSuccess: "だっしゅつせいこう！",
+        gameOverMsg: "おーまいがー😱",
+        gameClearedMsg: "びょうでくりあしたよ！",
+        gameMissedMsg: "みすしすぎちゃった！",
+        gameTimeoutMsg: "じかんぎれだよ〜！",
+        gameFinishedBtn: "しゅぎょうかんりょう！ 👌",
+        gameNextBtn: "つぎはがんばる！ 💪", item_water: "すいとう 💧", item_gym: "たいいくぎ 👕", item_hat: "あかはしぼうし 🧢", item_pencil: "ふでばこ・えんぴつ ✏️", item_notebook: "きょうかしょ・のーと 📚", item_diary: "れんらくちょう 📒", item_motivation: "やるき 🔥"
+    }
 };
 
 const MiniGame = ({ currentPlayTime, onTimeUpdate, onClose, avatar, highScore, onHighScoreUpdate, playSoundEffect, t }) => {
@@ -178,7 +238,8 @@ const MiniGame = ({ currentPlayTime, onTimeUpdate, onClose, avatar, highScore, o
         // ヘッダー
         React.createElement('div', { className: "flex justify-between items-center mb-6" },
             React.createElement('div', null,
-                React.createElement('h2', { className: "text-2xl font-black text-yellow-400" }, stage === 3 ? "最後の扉" : `ステージ ${stage}`),
+                // 🎒 いちねんせいモードのときは、ステージの名前もひらがなにするよ！
+                React.createElement('h2', { className: "text-2xl font-black text-yellow-400" }, stage === 3 ? (t('finalDoor') || "最後の扉") : `${t('stage') || "ステージ"} ${stage}`),
                 React.createElement('div', { className: "flex gap-6 items-center" },
                     React.createElement('div', { className: "flex flex-col" },
                         React.createElement('p', { className: "text-[10px] font-black opacity-40 uppercase tracking-widest" }, "TIME"),
@@ -201,7 +262,8 @@ const MiniGame = ({ currentPlayTime, onTimeUpdate, onClose, avatar, highScore, o
                 stage === 1 ? (
                     // 謎1: 数字タッチ
                     React.createElement('div', { className: "text-center" },
-                        React.createElement('p', { className: "mb-8 font-bold text-sky-300" }, "数字を 1 から順番に押せ！"),
+                        // 🎒 いちねんせいモードのときは、ひらがなのせつめいにするよ！
+                        React.createElement('p', { className: "mb-8 font-bold text-sky-300" }, t('gameStage1Desc') || "数字を 1 から順番に押せ！"),
                         React.createElement('div', { className: "grid grid-cols-2 gap-4" },
                             numbers.map(n => React.createElement('button', {
                                 key: n,
@@ -221,7 +283,8 @@ const MiniGame = ({ currentPlayTime, onTimeUpdate, onClose, avatar, highScore, o
                 ) : stage === 2 ? (
                     // 謎2: 色の順序
                     React.createElement('div', { className: "text-center" },
-                        React.createElement('p', { className: "mb-4 font-bold text-rose-300" }, "この順番で色を押せ！"),
+                        // 🎒 いちねんせいモードのときは、ひらがなのせつめいにするよ！
+                        React.createElement('p', { className: "mb-4 font-bold text-rose-300" }, t('gameStage2Desc') || "この順番で色を押せ！"),
                         React.createElement('div', { className: "flex justify-center gap-2 mb-10 bg-black/20 p-4 rounded-2xl border border-white/10" },
                             colorOrder.map((c, i) => React.createElement('span', { key: i, className: `text-3xl transition-opacity ${i < currentColorIdx ? 'opacity-20' : 'opacity-100'}` }, c))
                         ),
@@ -245,7 +308,8 @@ const MiniGame = ({ currentPlayTime, onTimeUpdate, onClose, avatar, highScore, o
                 ) : (
                     // 謎3: アイテム探し
                     React.createElement('div', { className: "text-center" },
-                        React.createElement('p', { className: "mb-4 font-bold text-amber-300" }, `${targetItem} を見つけ出せ！`),
+                        // 🎒 いちねんせいモードのときは、ひらがなのせつめいにするよ！
+                        React.createElement('p', { className: "mb-4 font-bold text-amber-300" }, `${targetItem} ${t('gameStage3Desc') || "を見つけ出せ！"}`),
                         React.createElement('div', { className: "grid grid-cols-4 gap-3 bg-white/5 p-4 rounded-[2.5rem] border border-white/5" },
                             findItems.map((item, i) => React.createElement('button', {
                                 key: i,
@@ -262,14 +326,15 @@ const MiniGame = ({ currentPlayTime, onTimeUpdate, onClose, avatar, highScore, o
                 // リザルト
                 React.createElement('div', { className: "text-center animate-bounce-slow" },
                     React.createElement('div', { className: "text-8xl mb-6 drop-shadow-2xl" }, timer < 60 && misses < 5 ? "🏁" : "😱"),
-                    React.createElement('h3', { className: "text-4xl font-black mb-2 text-white" }, timer < 60 && misses < 5 ? "脱出成功！" : "オーマイガー😱"),
+                    // 🎒 ここも、ひらがなで結果を表示できるように切り替えるよ！
+                    React.createElement('h3', { className: "text-4xl font-black mb-2 text-white" }, timer < 60 && misses < 5 ? (t('gameSuccess') || "脱出成功！") : (t('gameOverMsg') || "オーマイガー😱")),
                     React.createElement('p', { className: "text-xl font-bold text-yellow-400 mb-8" },
-                        timer < 60 && misses < 5 ? `${timer}秒 でクリアしたよ！` : (misses >= 5 ? "ミスしすぎちゃった！" : "時間切れだよ〜！")
+                        timer < 60 && misses < 5 ? `${timer}${t('gameClearedMsg') || "秒 でクリアしたよ！"}` : (misses >= 5 ? (t('gameMissedMsg') || "ミスしすぎちゃった！") : (t('gameTimeoutMsg') || "時間切れだよ〜！"))
                     ),
                     React.createElement('button', {
                         onClick: () => onClose(false),
                         className: "bg-white text-indigo-900 px-12 py-5 rounded-3xl font-black shadow-2xl hover:bg-slate-100 transition-transform active:scale-95"
-                    }, timer < 60 && misses < 5 ? "修行完了！ 👌" : "次はがんばる！ 💪")
+                    }, timer < 60 && misses < 5 ? (t('gameFinishedBtn') || "修行完了！ 👌") : (t('gameNextBtn') || "次はがんばる！ 💪"))
                 )
             )
         ),
@@ -339,9 +404,11 @@ function App() {
     const fileInputRef = useRef(null);
 
     const t = useCallback((key) => {
-        const lang = gameData.lang || 'ja';
+        // 🎒 おなまえが「いちねんせい」のときは、ひらがなの言葉のグループをえらぶよ！
+        const isFirstGrader = gameData.name === "いちねんせい";
+        const lang = isFirstGrader ? 'hiragana' : (gameData.lang || 'ja');
         return TRANSLATIONS[lang]?.[key] || TRANSLATIONS['ja']?.[key] || key;
-    }, [gameData.lang]);
+    }, [gameData.lang, gameData.name]);
 
     const filteredItems = useMemo(() => items.filter(item => item.category === activeCategory), [items, activeCategory]);
     const progress = useMemo(() => filteredItems.length > 0 ? (filteredItems.filter(item => item.checked).length / filteredItems.length) * 100 : 0, [filteredItems]);
@@ -438,6 +505,61 @@ function App() {
         setNewCatInput("");
         setShowCatModal(true);
         playSound('pop');
+    };
+
+    // 🎒 お名前が「いちねんせい」のときや、えらんだ言葉（言語）にあわせて、持ち物のなまえを切り替える魔法だよ！
+    const displayItemName = (item) => {
+        const defaultItemsMap = {
+            1: 'item_water',
+            2: 'item_gym',
+            3: 'item_hat',
+            4: 'item_pencil',
+            5: 'item_notebook',
+            6: 'item_diary',
+            7: 'item_motivation'
+        };
+        if (defaultItemsMap[item.id]) {
+            return t(defaultItemsMap[item.id]);
+        }
+        return item.name;
+    };
+
+    // 🎒 お名前が「いちねんせい」のときに、おたからのなまえをひらがなにする魔法だよ！
+    const displayRewardName = (name) => {
+        if (gameData.name !== "いちねんせい") return name;
+        const map = {
+            "💎 伝説 of ダイヤ": "💎 でんせつのだいや",
+            "👑 黄金の冠": "👑 おうごんのかんむり",
+            "🐉 ドラゴンの卵": "🐉 どらごんのたまご",
+            "⭐ スーパースター": "⭐ すーぱーすたー",
+            "🍦 無限アイス": "🍦 むげんあいす",
+            "🎮 幻 of ゲーム機": "🎮 まぼろしのげーむき",
+            "🚀 銀河ロケット": "🚀 ぎんがろけっと",
+            "🐱 幸運の招き猫": "🐱 こううんのまねきねこ",
+            "🌈 虹色バッジ": "🌈 にじいろばっじ",
+            "🍀 四つ葉のクローバー": "🍀 よつばのくろーばー",
+            "🦄 ユニコーンの角": "🦄 ゆにこーんのつの",
+            "🍕 黄金ピザ": "🍕 おうごんぴざ",
+            "🦉 知恵のフクロウ": "🦉 ちえのふくろう",
+            "🍄 魔法のキノコ": "🍄 まほうのきのこ",
+            "🍫 溶けないチョコ": "🍫 とけないちょこ",
+            "🗡️ 勇者のつるぎ": "🗡️ ゆうしゃのつるぎ",
+            "🎻 魔法のバイオリン": "🎻 まほうのばいおりん",
+            "🌙 三日月のランプ": "🌙 みかづきのらんぷ",
+            "🏰 雲の上の城": "🏰 くもののうえのしろ",
+            "🧸 命のぬいぐるみ": "🧸 いのちのぬいぐるみ",
+            "🎀 友情のリボン": "🎀 ゆうじょうのりぼん",
+            "🎐 風の鈴": "🎐 かぜのすず",
+            "🐳 空飛ぶ クジラ": "🐳 そらとぶくじら",
+            "🌵 砂漠のバラ": "🌵 さばくのばら",
+            "🐚 歌う貝殻": "🐚 うたうかいがら",
+            "🍯 黄金のはちみつ": "🍯 おうごんはちみつ",
+            "🔮 未来の水晶": "🔮 みらいのすいしょう",
+            "⚡ いなずまの杖": "⚡ いなずまのつえ",
+            "🪞 真実の鏡": "🪞 しんじつのかがみ",
+            "🧚 妖精の粉": "🧚 ようせいのこな"
+        };
+        return map[name] || name;
     };
 
     /* 📅 日付と時間の表示を、選んだ言葉にあわせるように変えたよ！ */
@@ -595,7 +717,8 @@ function App() {
                         React.createElement('div', { key: item.id, className: "group relative" },
                             React.createElement('div', { onClick: () => toggleCheck(item.id), className: `flex items-center gap-3 p-4 rounded-2xl border-2 transition-all cursor-pointer ${item.checked ? 'bg-slate-50 border-slate-100 opacity-60' : 'bg-white shadow-sm border-purple-50 hover:border-purple-200'}` },
                                 React.createElement('div', { className: item.checked ? 'text-green-400' : 'text-slate-200' }, React.createElement(Icon, { name: item.checked ? 'CheckCircle' : 'Circle', size: 24 })),
-                                React.createElement('div', { className: `flex-1 font-black text-sm text-slate-700 text-left ${item.checked ? 'line-through' : ''}` }, item.name),
+                                // 🎒 いちねんせいモードのときは、持ち物の名前をひらがなにするよ！
+                                React.createElement('div', { className: `flex-1 font-black text-sm text-slate-700 text-left ${item.checked ? 'line-through' : ''}` }, displayItemName(item)),
                                 !item.checked && React.createElement('button', { onClick: (e) => { e.stopPropagation(); deleteItem(item.id); }, className: "p-1.5 text-slate-300 hover:text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity" }, React.createElement(Icon, { name: 'X', size: 16 }))
                             )
                         )
@@ -606,7 +729,8 @@ function App() {
             ) : (
                 React.createElement('div', { className: "text-center py-4" },
                     React.createElement('div', { className: "bg-rose-50 text-rose-500 p-4 rounded-2xl font-bold mb-4" }, t('fingerCheck')),
-                    items.filter(i => i.category === activeCategory).map(item => React.createElement('div', { key: item.id, className: "p-4 bg-white rounded-2xl border mb-2 font-bold" }, item.name)),
+                    // 🎒 いちねんせいモードのときは、持ち物の名前をひらがなにするよ！
+                    items.filter(i => i.category === activeCategory).map(item => React.createElement('div', { key: item.id, className: "p-4 bg-white rounded-2xl border mb-2 font-bold" }, displayItemName(item))),
                     React.createElement('button', {
                         onClick: () => {
                             // 新しいお宝をランダムで選ぶよ
@@ -640,7 +764,7 @@ function App() {
                 React.createElement('div', { className: "p-6 bg-gradient-to-r from-amber-300 to-yellow-500 text-white flex justify-between items-center shrink-0" },
                     React.createElement('div', { className: "flex flex-col" },
                         React.createElement('h3', { className: "text-xl font-black flex items-center gap-2" }, React.createElement(Icon, { name: 'Medal', size: 24 }), t('zukanTitle')),
-                        React.createElement('p', { className: "text-[10px] font-bold opacity-80" }, getRankName(totalLevel, gameData.lang))
+                        React.createElement('p', { className: "text-[10px] font-bold opacity-80" }, getRankName(totalLevel, gameData.lang, gameData.name))
                     ),
                     React.createElement('button', { onClick: () => { setShowInventory(false); setIsEditingName(false); setIsEditingEmoji(false); }, className: "p-2 bg-white/20 rounded-xl" }, React.createElement(Icon, { name: 'X', size: 24 }))
                 ),
@@ -726,11 +850,15 @@ function App() {
                             React.createElement('p', { className: "text-slate-400 font-bold text-sm" }, t('noHistory'))
                         )
                     ) : (
-                        gameData.inventory.map(item => React.createElement('div', { key: item.id, className: "bg-white p-6 rounded-[3rem] border-2 border-slate-50 flex flex-col items-center gap-4 shadow-md hover:scale-105 transition-transform" },
-                            /* お宝も大きく！たくさんならんで見やすいね！ */
-                            React.createElement('div', { className: "text-6xl select-none" }, item.name.split(' ')[0]),
-                            React.createElement('div', { className: "text-sm font-black text-slate-500 text-center leading-snug" }, item.name.split(' ').slice(1).join(' '))
-                        ))
+                        gameData.inventory.map(item => {
+                            // 🎒 いちねんせいモードのときは、おたからの名前をひらがなにするよ！
+                            const name = displayRewardName(item.name);
+                            return React.createElement('div', { key: item.id, className: "bg-white p-6 rounded-[3rem] border-2 border-slate-50 flex flex-col items-center gap-4 shadow-md hover:scale-105 transition-transform" },
+                                /* お宝も大きく！たくさんならんで見やすいね！ */
+                                React.createElement('div', { className: "text-6xl select-none" }, name.split(' ')[0]),
+                                React.createElement('div', { className: "text-sm font-black text-slate-500 text-center leading-snug" }, name.split(' ').slice(1).join(' '))
+                            );
+                        })
                     )
                 ),
                 React.createElement('div', { className: "p-6 bg-slate-50 border-t shrink-0" },
@@ -769,8 +897,9 @@ function App() {
         showReward && React.createElement('div', { className: "fixed inset-0 z-[300] flex items-center justify-center p-4 bg-purple-500/80 backdrop-blur-md" },
             React.createElement('div', { className: "bg-white rounded-[3.5rem] p-10 text-center shadow-2xl border-8 border-yellow-200 animate-floating scale-110" },
                 React.createElement('div', { className: "text-2xl font-black text-purple-500 mb-2" }, "やったー！✨"),
-                React.createElement('div', { className: "text-8xl mb-6 drop-shadow-lg" }, showReward.name.split(' ')[0]),
-                React.createElement('h3', { className: "text-2xl font-black text-slate-800 mb-6" }, showReward.name.split(' ').slice(1).join(' ')),
+                // 🎒 いちねんせいモードのときは、おたからの名前をひらがなにするよ！
+                React.createElement('div', { className: "text-8xl mb-6 drop-shadow-lg" }, displayRewardName(showReward.name).split(' ')[0]),
+                React.createElement('h3', { className: "text-2xl font-black text-slate-800 mb-6" }, displayRewardName(showReward.name).split(' ').slice(1).join(' ')),
                 React.createElement('p', { className: "text-slate-500 font-bold mb-8" }, "新しいお宝をゲットしたよ！"),
                 React.createElement('div', { className: "flex flex-col gap-3" },
                     React.createElement('button', {
